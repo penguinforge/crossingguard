@@ -2,9 +2,15 @@
 <title>Crossing Guard</title>
 <h1>IAVM Report {{ iava }}</h1>
 <h3>Severity: {{ severity }}</h3>
+
+<em>CVE's Reported:</em>
 <ul>
 {% for cve in  cves %}
-    <li>{{ cve }}</li>
+    {% if cve.values() %}
+      <li><a href="https://access.redhat.com/security/cve/{{ "".join(cve.keys()) }}">{{ "".join(cve.keys()) }}</a></li>
+    {% else %}
+      <li>{{ cve.keys }} Does Not apply to a Red Hat product</li>
+    {% endif %}
 {% else %}
     <li>There are No CVE's listed for this IAVA.</li>
 {% endfor %}
