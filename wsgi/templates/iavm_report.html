@@ -1,3 +1,11 @@
 <!me }}doctype html>
 <title>Crossing Guard</title>
 <h1>IAVM Report {{ iava }}</h1>
+<h3>Severity: {{ severity }}</h3>
+<ul>
+{% for cve in  cves %}
+    <li>{{ cve }}</li>
+{% else %}
+    <li>There are No CVE's listed for this IAVA.</li>
+{% endfor %}
+<ul>
