@@ -4,6 +4,9 @@ from flask import request
 
 app = Flask(__name__)
 
+# Additional Logging for OpenShift
+app.config['PROPAGATE_EXCEPTIONS'] = True
+
 @app.route("/")
 def index():
     return render_template('index.html')
