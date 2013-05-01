@@ -1,17 +1,44 @@
-<!me }}doctype html>
+<!doctype html>
 <title>Crossing Guard</title>
 <h1>IAVM Report {{ iava }}</h1>
 <h3>Severity: {{ severity }}</h3>
+<b>Title</b>: {{ iavm_title }}</br>
+<b>Released</b>: {{ release_date }}
 
-<em>CVE's Reported:</em>
+<table border="0" cellspacing="10">
+  <tr>
+     <td>
+         <h4>CVE's Reported:</h4>
+         <ul>
+         {% for cve in cves %}
+             {% if cve.values() %}
+               <li><a href="https://access.redhat.com/security/cve/{{ "".join(cve.keys()) }}">{{ "".join(cve.keys()) }}</a></li>
+             {% else %}
+               <li>{{ cve.keys }} Does Not apply to a Red Hat product</li>
+             {% endif %}
+         {% else %}
+             <li>There are No CVE's listed for this IAVA.</li>
+         {% endfor %}
+         </ul>
+     </td>
+     <td>
+         <h4>Midigation Information:</h4>
+         <ul>
+         {% for cve in cves %}
+             <li><a href="https://access.redhat.com/search/results/?col=avalon_portal&quickSearch={{ "".join(cve.keys()) }}">{{ "".join(cve.keys()) }}</a></li>
+         {% else %}
+             <li>Currently there is no migigation information.</li>
+         {% endfor %}
+         </ul>
+     </td>
+  </tr>
+</table>
+     
+<h5>Referances:</h5>
 <ul>
-{% for cve in  cves %}
-    {% if cve.values() %}
-      <li><a href="https://access.redhat.com/security/cve/{{ "".join(cve.keys()) }}">{{ "".join(cve.keys()) }}</a></li>
-    {% else %}
-      <li>{{ cve.keys }} Does Not apply to a Red Hat product</li>
-    {% endif %}
+{% for ref in iavm_referances %}
+    <li><a href="{{ "".join(ref.values()) }}">{{ "".join(ref.keys()) }}</a></li>
 {% else %}
-    <li>There are No CVE's listed for this IAVA.</li>
+    <li>There are No Referances for this IAVM.</li>
 {% endfor %}
-<ul>
+</ul>

@@ -40,18 +40,27 @@ def IAVM_Report(iavm=None):
         xmlsoup.originalEncoding
 
         cves = []
+        referances = []
         severity = "Not Found."
-
+        title = ""
+        date = ""
+ 
         iavms = xmlsoup.findAll('iavm')
         for i in iavms:
             if iava == re.findall(r'\"(.+?)\"', "{0}".format(i.s).split()[7])[0]:
                 # If you want to see how an IAVA as xml is structured.
-                print i
+                #print i
                 severity = i.s['severity']
+                title = i.s['title']
+                date = i.s['releasedate']
+                links = i.s.findAll('reference')
+                for link in links:
+                    referances.append({link['refname']: link['url']})
+
                 iavm_cves = i.s.findAll('cvenumber')
                 for cve in iavm_cves:
                     base_uri = 'https://access.redhat.com/security/cve/'
-                    try:
+                    try:  # Check to see if Red Hat has this as a record. 
                         uri = base_uri + cve.contents[0]
                         html = urllib2.urlopen(uri)
 
@@ -63,7 +72,9 @@ def IAVM_Report(iavm=None):
                         print e.code
                     except urllib2.URLError, e:
                         print e.code
-        return render_template('iavm_report.html', iava=iava, severity=severity, cves=cves)
+        return render_template('iavm_report.html', iava=iava, severity=severity, 
+                cves=cves, iavm_title=title, release_date=date, 
+                iavm_referances=referances)
 
 
 if __name__ == "__main__":
