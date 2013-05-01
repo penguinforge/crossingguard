@@ -1,0 +1,11 @@
+<!doctype html>
+<title>Crossing Guard IAVM List</title>
+<h1>DISA IAVM List</h1>
+<li><em>List Pulled from: <a href='http://iase.disa.mil/stigs/'>http://iase.disa.mil/stigs/</a></em></li>
+<ul>
+   {% for iavm in iavms %}
+      <li>{{ iavm[0] }}: <a href="{{iavm[0]}}">{{ iavm[2] }}</a>  <b>{{ iavm[1] }}</b></li>
+   {% else %}
+      <li>IAVM's could not be retrieved.</li>
+   {% endfor %}
+</ul>

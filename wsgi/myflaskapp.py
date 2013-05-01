@@ -37,7 +37,7 @@ def IAVM_Report(iavm=None):
         for i in iavms:
             if iava == re.findall(r'\"(.+?)\"', "{0}".format(i.s).split()[7])[0]:
                 # If you want to see how an IAVA as xml is structured.
-                #print i
+                print i
                 severity = i.s['severity']
                 title = i.s['title']
                 date = i.s['releasedate']
@@ -63,6 +63,27 @@ def IAVM_Report(iavm=None):
         return render_template('iavm_report.html', iava=iava, severity=severity, 
                 cves=cves, iavm_title=title, release_date=date, 
                 iavm_referances=referances)
+
+
+@app.route("/IAVM/list") 
+@app.route("/IAVM/LIST") 
+def IAVM_List():
+     base_uri = 'http://iase.disa.mil/stigs/downloads/xml/iavm-to-cve(u).xml'
+     xml = urllib2.urlopen(base_uri)
+     xmlsoup = BeautifulSoup(xml.read())
+     xmlsoup.originalEncoding
+
+     iavms = xmlsoup.findAll('iavm')
+     iavm_list = []
+     for iava in iavms:
+         iavm = iava.s['iavm']
+         severity = iava.s['severity']
+         title = iava.s['title']
+         iavm_list.append((iavm, severity, title))
+
+     print iavm_list[0][0]
+
+     return render_template('iavm_list.html', iavms=iavm_list)
 
 
 if __name__ == "__main__":
