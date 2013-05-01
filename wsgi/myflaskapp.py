@@ -37,7 +37,7 @@ def IAVM_Report(iavm=None):
         for i in iavms:
             if iava == re.findall(r'\"(.+?)\"', "{0}".format(i.s).split()[7])[0]:
                 # If you want to see how an IAVA as xml is structured.
-                print i
+                # print i
                 severity = i.s['severity']
                 title = i.s['title']
                 date = i.s['releasedate']
