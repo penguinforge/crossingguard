@@ -13,18 +13,6 @@ def index():
     return render_template('index.html')
 
 
-@app.route("/CVE/", methods=['GET', 'POST']) 
-def CVE_Report():
-    if request.method == 'POST':
-        return render_template('cve_report.html', cve=request.form['CVE'])
-
-    return '''
-            <form action="" method="post">
-               <p>CVE: <input type=text name=CVE> <input type=submit value="Get Report">
-            </form>
-           '''
-
-
 @app.route("/IAVM/", methods=['POST']) 
 @app.route("/IAVM/<iavm>") 
 def IAVM_Report(iavm=None):
