@@ -3,10 +3,32 @@
 <h1>Crossing Guard!</h1>
 
 <p>
-    A Red Hat Support site that assist you in getting information on Red Hat 
-    CVE's and information on CVE's. 
+    Crossing Guard is a Red Hat Support site that assists you in getting 
+    security information <a href="IAVM/LIST">Government IAVM's</a> with regard to Red Hat products. 
+    </br>
+ 
+    By simply completing the form below or appending your IAVA to the end of 
+    <a href="http://crossingguard-penguinforge.rhcloud.com/IAVM/">
+    http://crossingguard-penguinforge.rhcloud.com/IAVM/(IAVA)
+    </a> you can get a full report on the IAVM and how it relates to your Red 
+    Hat products. 
 </p>
-<ol>
-    <li><a href="CVE/">CVE Report</a></li>
-    <li>IAVM Checker</li>
-</ol>
+<li><em>Completing the form with invalid information will result in a report with 
+    no data. <b>Note</b>: this does not mean that there is an IAVM for the 
+    data you have provided.</em>
+</li>
+
+<form action="/IAVM/" method="post">
+  <p>IAVM: <input type=text name=IAVM> 
+     <input type=submit value="Get Report">
+  </p>
+</form>
+
+<p>
+    As an example try: <a href="http://crossingguard-penguinforge.rhcloud.com/IAVM/2013-A-0068"><b>2013-A-0068</b></a>.
+</p>
+
+<div style="float: right;">
+    <em>Please file any issues at <a href="https://github.com/sferich888/crossingguard/issues?state=open">Git Hub</a></em></br>
+    Maintainer: <a href="mailto:erich@redhat.com?&subject=CrossingGuard%20Comments">Eric Rich</a>
+</div>
