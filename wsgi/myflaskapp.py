@@ -1,6 +1,7 @@
 import urllib2
 from BeautifulSoup import BeautifulSoup
 import re
+import os
 from flask import Flask, render_template, request, url_for
 
 app = Flask(__name__, static_url_path='/static/')
@@ -10,7 +11,7 @@ app.config['PROPAGATE_EXCEPTIONS'] = True
 
 @app.route("/")
 def index():
-    return render_template('index.html')
+    return render_template('index.html', app_dns=os.environ['OPENSHIFT_APP_DNS'])
 
 
 @app.route("/IAVM/", methods=['POST']) 
