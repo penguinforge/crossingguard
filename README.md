@@ -4,7 +4,33 @@ Crossing Guard
 IAVM mapping tool to Red Hat products. 
 =======
 
-This is the code used to host http://crossingguard-penguinforge.rhcloud.com/ a Red Hat support site.
+This is the code used to host http://crossingguard-penguinforge.rhcloud.com/ .
+
+The code is designed to run on an OpenShift enviornment using the python 2.6 cartridge. 
+
+You should be able to run the code localy by cloning it and running the following (Note this uses [python virtualenv](https://pypi.python.org/pypi/virtualenv)):
+
+```
+virtualenv cguard_py
+cguard_py/bin/python crossingguard/setup.py install
+
+export OPENSHIFT_APP_DNS=localhost
+cguard_py/bin/python crossingguard/wsgi/myflaskapp.py
+```
+
+You can also deploy it to your own OpenShift online enviornment with the following: 
+```
+rhc app create APP_NAME python-2.6 --from-code https://github.com/penguinforge/crossingguard.git
+```
+OR
+```
+rhc app create APP_NAME pyton-2.6
+cd APP_NAME
+git remote add upstream https://github.com/penguinforge/crossingguard.git
+git fetch upstream
+git checkout master; git merge --strategy=recursive -X theirs upstream/master
+git push
+```
 
  Copyright (C) 2013  Eric Rich
 
